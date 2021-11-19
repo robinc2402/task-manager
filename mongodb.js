@@ -1,7 +1,15 @@
 // CRUD operations
 
-const mongodb = require("mongodb");
-const MongoClient = mongodb.MongoClient;
+// const mongodb = require("mongodb");
+// const MongoClient = mongodb.MongoClient;
+// const ObjectID = mongodb.ObjectID;
+
+const { MongoClient, ObjectID } = require("mongodb");
+
+const id = new ObjectID();
+console.log(id);
+console.log(id.getTimestamp());
+console.log(id.toHexString().length);
 
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
@@ -13,18 +21,19 @@ MongoClient.connect(connectionURL, { useNewURLParser: true }, (err, client) => {
   const db = client.db(databaseName);
 
   // insert a single document and know its result with a callback
-  // db.collection("users").insertOne(
-  //   {
-  //     name: "ADavid",
-  //     age: 22,
-  //   },
-  //   (error, result) => {
-  //     if (error) {
-  //       return console.log("Unable to insert user");
-  //     }
-  //     console.log(result);
-  //   }
-  // );
+  db.collection("users").insertOne(
+    {
+      _id: id,
+      name: "Vikram",
+      age: 22,
+    },
+    (error, result) => {
+      if (error) {
+        return console.log("Unable to insert user");
+      }
+      console.log(result);
+    }
+  );
 
   // insert multiple docs
   // db.collection("users").insertMany(
@@ -42,26 +51,26 @@ MongoClient.connect(connectionURL, { useNewURLParser: true }, (err, client) => {
   // );
 
   // challenge
-  db.collection("tasks").insertMany(
-    [
-      {
-        desc: "Prepare migration endpoints",
-        complete: false,
-      },
-      {
-        desc: "Finalise PHP PPT",
-        complete: false,
-      },
-      {
-        desc: "Migration architecture diagram",
-        complete: true,
-      },
-    ],
-    (err, res) => {
-      if (err) {
-        return console.log("Unable to insert tasks");
-      }
-      console.log(res);
-    }
-  );
+  // db.collection("tasks").insertMany(
+  //   [
+  //     {
+  //       desc: "Prepare migration endpoints",
+  //       complete: false,
+  //     },
+  //     {
+  //       desc: "Finalise PHP PPT",
+  //       complete: false,
+  //     },
+  //     {
+  //       desc: "Migration architecture diagram",
+  //       complete: true,
+  //     },
+  //   ],
+  //   (err, res) => {
+  //     if (err) {
+  //       return console.log("Unable to insert tasks");
+  //     }
+  //     console.log(res);
+  //   }
+  // );
 });
