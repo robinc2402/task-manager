@@ -11,23 +11,34 @@ MongoClient.connect(connectionURL, { useNewURLParser: true }, (err, client) => {
   }
   const db = client.db(databaseName);
 
-  /* Testing UpdateMany operator of MongoDB */
+  /* Testing delete operator of MongoDB */
 
-  db.collection("tasks")
-    .updateMany(
-      { complete: false },
-      {
-        $set: {
-          complete: true,
-        },
-      }
-    )
+  db.collection("users")
+    .deleteMany({ age: 33 })
     .then((res) => {
-      console.log("Success: " + res);
+      console.log(res);
     })
     .catch((err) => {
-      console.log("Error: " + err);
+      console.log(err);
     });
+
+  /* Testing UpdateMany operator of MongoDB */
+
+  // db.collection("tasks")
+  //   .updateMany(
+  //     { complete: false },
+  //     {
+  //       $set: {
+  //         complete: true,
+  //       },
+  //     }
+  //   )
+  //   .then((res) => {
+  //     console.log("Success: " + res);
+  //   })
+  //   .catch((err) => {
+  //     console.log("Error: " + err);
+  //   });
 
   /* Tested MongoDB promise and basic update operators */
 
