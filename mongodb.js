@@ -11,21 +11,41 @@ MongoClient.connect(connectionURL, { useNewURLParser: true }, (err, client) => {
   }
   const db = client.db(databaseName);
 
-  db.collection("users")
-    .updateOne(
+  /* Testing UpdateMany operator of MongoDB */
+
+  db.collection("tasks")
+    .updateMany(
+      { complete: false },
       {
-        _id: new ObjectID("6197ac869f88962b2ab1e910"),
-      },
-      {
-        $inc: {
-          age: 2,
+        $set: {
+          complete: true,
         },
       }
     )
     .then((res) => {
-      console.log("Update successful: " + res);
+      console.log("Success: " + res);
     })
     .catch((err) => {
-      console.log("Error in updating : " + err);
+      console.log("Error: " + err);
     });
+
+  /* Tested MongoDB promise and basic update operators */
+
+  // db.collection("users")
+  //   .updateOne(
+  //     {
+  //       _id: new ObjectID("6197ac869f88962b2ab1e910"),
+  //     },
+  //     {
+  //       $inc: {
+  //         age: 2,
+  //       },
+  //     }
+  //   )
+  //   .then((res) => {
+  //     console.log("Update successful: " + res);
+  //   })
+  //   .catch((err) => {
+  //     console.log("Error in updating : " + err);
+  //   });
 });
