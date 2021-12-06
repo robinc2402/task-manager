@@ -29,7 +29,8 @@ const User = mongoose.model("User", {
     trim: true,
     minLength: 7,
     validate(value) {
-      if ("password" === value) throw new Error("It cant be 'password'.");
+      if (value.toLowerCase().includes("password"))
+        throw new Error("Password must not include the term 'password'.");
     },
   },
   age: {
@@ -44,7 +45,7 @@ const User = mongoose.model("User", {
 const me = new User({
   name: "  Robin     ",
   email: "RoBinC@OnE.dK",
-  password: 1241211,
+  password: "password1",
 });
 
 me.save()
