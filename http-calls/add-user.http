@@ -1,0 +1,10 @@
+### Send POST request with json body
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "age": 21,
+  "email": "sameplt@test.com",
+  "name": "Test Test3",
+  "password": "1223423432422"
+}
