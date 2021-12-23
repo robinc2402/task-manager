@@ -1,0 +1,7 @@
+### GET request with a header
+#GET http://localhost:3000/tasks/
+#Accept: application/json
+
+
+GET http://localhost:3000/tasks/61c458ac34091da234bbcb77
+Accept: application/json

@@ -20,6 +20,31 @@ app.post("/users", (req, res) => {
     });
 });
 
+app.get("/users", (req, res) => {
+  const users = User.find({})
+    .then((users) => {
+      res.status(200).send(users);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
+    });
+});
+
+app.get("/users/:id", (req, res) => {
+  const id = req.params.id;
+
+  const user = User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(404).send();
+      }
+      res.status(200).send(user);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
+    });
+});
+
 app.post("/tasks", (req, res) => {
   const task = new Task(req.body);
   task
@@ -30,6 +55,33 @@ app.post("/tasks", (req, res) => {
     .catch((e) => {
       console.log("Error while saving ", e);
       res.status(400).send(e);
+    });
+});
+
+app.get("/tasks", (req, res) => {
+  Task.find({})
+    .then((tasks) => {
+      if (!tasks) {
+        res.status(404).send();
+      }
+      res.status(200).send(tasks);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
+    });
+});
+
+app.get("/tasks/:id", (req, res) => {
+  const id = req.params.id;
+  Task.findById(id)
+    .then((tasks) => {
+      if (!tasks) {
+        res.status(404).send();
+      }
+      res.status(200).send(tasks);
+    })
+    .catch((e) => {
+      res.status(500).send(e);
     });
 });
 
