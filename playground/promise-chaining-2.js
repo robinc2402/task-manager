@@ -22,18 +22,32 @@ const Task = require("../src/models/task");
 
 const taskDeleteAndCount = async (id) => {
   const task = await Task.findByIdAndDelete(id);
-  // if (!task) {
-  //   return Promise.reject("Could not find/delete task with given iD", id);
-  // }
-  const count = await Task.countDocuments({ completed: false });
-  return count;
+  return await Task.count({ completed: false });
 };
 
-// 61ae0a311afc0e8b6e343a4a
-taskDeleteAndCount("61ae0a311afc0e8b6e343a4a")
-  .then((res) => {
-    console.log("Count of incomplete tasks ", res);
+taskDeleteAndCount("61aca6d6e8b1e72e722b4003")
+  .then((count) => {
+    console.log("Count of incompleted tasks => " + count);
   })
   .catch((e) => {
-    console.log("e", e);
+    console.log("E", e);
   });
+
+// const taskDeleteAndCount = async (id) => {
+//   const task = await Task.findByIdAndDelete(id);
+//   // if (!task) {
+//   //   return Promise.reject("Could not find/delete task with given iD", id);
+//   // }
+//   const count = await Task.countDocuments({ completed: false });
+//   return count;
+// };
+//
+
+// 61ae0a311afc0e8b6e343a4a
+// taskDeleteAndCount("61ae0a311afc0e8b6e343a4a")
+//   .then((res) => {
+//     console.log("Count of incomplete tasks ", res);
+//   })
+//   .catch((e) => {
+//     console.log("e", e);
+//   });
