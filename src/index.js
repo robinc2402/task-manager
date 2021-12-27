@@ -42,8 +42,9 @@ app.get("/users/:id", async (req, res) => {
 });
 
 app.post("/tasks", async (req, res) => {
+  const task = new Task(req.body);
   try {
-    const task = await new Task(req.body);
+    task.save();
     res.status(201).send(task);
   } catch (e) {
     console.log("Error while saving ", e);
